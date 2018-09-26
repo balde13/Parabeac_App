@@ -23,7 +23,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String URL_DATA = "https://api.mlab.com/api/1/databases/my-db/collections?apiKey=4MNr6mHQYhCkRq6-uGlga4EnoHUCHZ";
+  //  private static final String URL_DATA = "https://api.mlab.com/api/1/databases/my-db/collections/my-coll?apiKey=4MNr6mHQYhCkRq6-uGlga4EnoHUCHZ";
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
