@@ -13,6 +13,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,7 +24,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-  //  private static final String URL_DATA = "https://api.mlab.com/api/1/databases/my-db/collections/my-coll?apiKey=4MNr6mHQYhCkRq6-uGlga4EnoHUCHZ";
+    private static final String URL_DATA = "https://www.jasonbase.com/things/37B3.json";
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -48,33 +49,21 @@ public class MainActivity extends AppCompatActivity {
         final ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading...");
         progressDialog.show();
-
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
                 URL_DATA, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
                 progressDialog.dismiss();
-
                 try {
-
                     JSONObject jsonObject = new JSONObject(response);
-
-                    JSONArray array = jsonObject.getJSONArray("items");
-
+                    JSONArray array = jsonObject.getJSONArray("users");
                     for (int i = 0; i < array.length(); i++){
-
                         JSONObject jo = array.getJSONObject(i);
-
-                        DevelopersList developers = new DevelopersList(jo.getString("login"), jo.getString("html_url"),
-                                jo.getString("avatar_url"));
+                        DevelopersList developers = new DevelopersList(jo.getString("name"));
                         developersLists.add(developers);
-
                     }
-
                     adapter = new DevelopersAdapter(developersLists, getApplicationContext());
                     recyclerView.setAdapter(adapter);
-
                 } catch (JSONException e) {
 
                     e.printStackTrace();

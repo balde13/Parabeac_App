@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
+
 
 import java.util.List;
 
@@ -23,8 +23,7 @@ public class DevelopersAdapter extends RecyclerView.Adapter<DevelopersAdapter.Vi
 
 
     public static final String KEY_NAME = "name";
-    public static final String KEY_IMAGE = "image";
-    public static final String KEY_URL = "url";
+
 
     // we define a list from the DevelopersList java class
 
@@ -54,20 +53,14 @@ public class DevelopersAdapter extends RecyclerView.Adapter<DevelopersAdapter.Vi
         // this method will bind the data to the ViewHolder from whence it'll be shown to other Views
 
         final DevelopersList developersList = developersLists.get(position);
-        holder.login.setText(developersList.getLogin());
-
-        Picasso.with(context)
-                .load(developersList.getAvatar_url())
-                .into(holder.avatar_url);
+        holder.name.setText(developersList.getName());
 
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DevelopersList developersList1 = developersLists.get(position);
                 Intent skipIntent = new Intent(v.getContext(), ProfileActivity.class);
-                skipIntent.putExtra(KEY_NAME, developersList1.getLogin());
-                skipIntent.putExtra(KEY_URL, developersList1.getHtml_url());
-                skipIntent.putExtra(KEY_IMAGE, developersList1.getAvatar_url());
+                skipIntent.putExtra(KEY_NAME, developersList1.getName());
                 v.getContext().startActivity(skipIntent);
             }
         });
@@ -86,9 +79,7 @@ public class DevelopersAdapter extends RecyclerView.Adapter<DevelopersAdapter.Vi
 
         // define the View objects
 
-        public TextView login;
-        public ImageView avatar_url;
-        public TextView html_url;
+        public TextView name;
         public LinearLayout linearLayout;
 
         public ViewHolder(View itemView) {
@@ -96,9 +87,7 @@ public class DevelopersAdapter extends RecyclerView.Adapter<DevelopersAdapter.Vi
 
             // initialize the View objects
 
-            login = (TextView) itemView.findViewById(R.id.username);
-            avatar_url = (ImageView) itemView.findViewById(R.id.imageView);
-            html_url = (TextView) itemView.findViewById(R.id.htmUrl);
+            name = (TextView) itemView.findViewById(R.id.username);
             linearLayout = (LinearLayout) itemView.findViewById(R.id.linearLayout);
         }
 
